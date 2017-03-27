@@ -6,9 +6,6 @@
 //  Copyright © 2017 Jake Romer. All rights reserved.
 //
 
-import Alamofire
-import Foundation
-
 struct WeatherAPI {
   private static let BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
   private static let APP_ID = "aa3b36c42f2a9dad5ca5451c29339e7b"
@@ -21,5 +18,5 @@ struct WeatherAPI {
     }
   }
 
-  typealias DownloadComplete = (DataResponse<Any>) -> ()
+  typealias DownloadComplete = (CurrentWeather?) -> ()
 }

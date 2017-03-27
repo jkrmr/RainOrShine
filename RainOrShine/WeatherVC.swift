@@ -21,8 +21,13 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     tableView.delegate = self
     tableView.dataSource = self
     let weather = CurrentWeather()
-    weather.downloadWeatherDetails { (resp) in
-      print(resp)
+    
+    weather.downloadWeatherDetails { (currentWeather) in
+      guard let currentWeather = currentWeather else { return }
+      self.dateLabel.text = currentWeather.date
+      self.temperatureLabel.text = "\(currentWeather.currentTemp)º"
+      self.locationLabel.text = currentWeather.cityName
+      self.weatherDescription.text = currentWeather.weatherType
     }
   }
 

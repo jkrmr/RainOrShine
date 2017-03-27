@@ -19,10 +19,9 @@ class CurrentWeather {
   
   var _date: String!
   var date: String {
-    if _date == nil { return "" }
     let dateFormatter = DateFormatter()
     dateFormatter.dateStyle = .long
-    dateFormatter.timeStyle = .long
+    dateFormatter.timeStyle = .none
     let currentDate = dateFormatter.string(from: Date())
     return "Today, \(currentDate)"
   }
@@ -42,7 +41,26 @@ class CurrentWeather {
   func downloadWeatherDetails(completed: @escaping WeatherAPI.DownloadComplete) {
     let currentWeatherURL = URL(string: WeatherAPI.queryURL())!
     Alamofire.request(currentWeatherURL).responseJSON { (resp) in
-      completed(resp)
+      if let dict = resp.result.value as? [String: AnyObject],
+        let cityName = dict["name"] as? String,
+        let weather = dict["weather"] as? [(AnyObject)],
+        let short = weather.first as? [String: AnyObject],
+        let weatherType = short["description"] as? String,
+        let main = dict["main"] as? [String: AnyObject],
+        let kelvinTemp = main["temp"] as? Double {
+
+        self._cityName = cityName.capitalized
+        self._weatherType = weatherType
+
+        let fahrenheitTemp = kelvinTemp * (9.0/5.0) - 459.67
+        self._currentTemp = Double(round(10 * fahrenheitTemp)/10)
+
+        completed(self)
+      }
+      else {
+        print("Error: API query was not successful.")
+        completed(nil)
+      }
     }
   }
 }
