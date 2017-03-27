@@ -1,0 +1,6 @@
+framework module Pods_RainOrShine {
+  umbrella header "Pods-RainOrShine-umbrella.h"
+
+  export *
+  module * { export * }
+}
