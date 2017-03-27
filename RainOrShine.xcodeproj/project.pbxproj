@@ -14,6 +14,7 @@
 		1BA16B0A1E88C1A200CB3E97 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BA16B091E88C1A200CB3E97 /* Assets.xcassets */; };
 		1BA16B0D1E88C1A200CB3E97 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BA16B0B1E88C1A200CB3E97 /* LaunchScreen.storyboard */; };
 		1BA8AC691E895A0300EBA643 /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA8AC681E895A0300EBA643 /* WeatherAPI.swift */; };
+		1BA8AC6B1E895C6A00EBA643 /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA8AC6A1E895C6A00EBA643 /* CurrentWeather.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		1BA16B0C1E88C1A200CB3E97 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1BA16B0E1E88C1A200CB3E97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BA8AC681E895A0300EBA643 /* WeatherAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
+		1BA8AC6A1E895C6A00EBA643 /* CurrentWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
 		20F23FBB4EADD77FDFFD8698 /* Pods-RainOrShine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RainOrShine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RainOrShine/Pods-RainOrShine.debug.xcconfig"; sourceTree = "<group>"; };
 		5183ABF276D390147087BEEA /* Pods_RainOrShine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RainOrShine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4B7068CD5229454757B118E /* Pods-RainOrShine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RainOrShine.release.xcconfig"; path = "Pods/Target Support Files/Pods-RainOrShine/Pods-RainOrShine.release.xcconfig"; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				1BA16B021E88C1A200CB3E97 /* AppDelegate.swift */,
+				1BA8AC6A1E895C6A00EBA643 /* CurrentWeather.swift */,
 				1BA8AC681E895A0300EBA643 /* WeatherAPI.swift */,
 				1BA16B041E88C1A200CB3E97 /* WeatherVC.swift */,
 				1BA16B061E88C1A200CB3E97 /* Main.storyboard */,
@@ -217,6 +220,7 @@
 			files = (
 				1BA16B051E88C1A200CB3E97 /* WeatherVC.swift in Sources */,
 				1BA16B031E88C1A200CB3E97 /* AppDelegate.swift in Sources */,
+				1BA8AC6B1E895C6A00EBA643 /* CurrentWeather.swift in Sources */,
 				1BA8AC691E895A0300EBA643 /* WeatherAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

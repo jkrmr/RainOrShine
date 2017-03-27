@@ -6,6 +6,7 @@
 //  Copyright © 2017 Jake Romer. All rights reserved.
 //
 
+import Alamofire
 import Foundation
 
 struct WeatherAPI {
@@ -19,4 +20,6 @@ struct WeatherAPI {
       return "\(BASE_URL)?q=seattle&APPID=\(APP_ID)"
     }
   }
+
+  typealias DownloadComplete = (DataResponse<Any>) -> ()
 }

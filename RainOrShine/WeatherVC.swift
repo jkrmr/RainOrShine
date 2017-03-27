@@ -20,6 +20,10 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     super.viewDidLoad()
     tableView.delegate = self
     tableView.dataSource = self
+    let weather = CurrentWeather()
+    weather.downloadWeatherDetails { (resp) in
+      print(resp)
+    }
   }
 
   func numberOfSections(in tableView: UITableView) -> Int {
