@@ -28,8 +28,8 @@ class CurrentWeather {
     self.weatherType = weatherType
   }
 
-  static func fetchFromAPI(completed: @escaping WeatherAPI.CurrentComplete) {
-    let url = URL(string: WeatherAPI.currentWeatherURL())!
+  static func fetchFromAPI(location: WeatherAPI.Coordinates, completed: @escaping WeatherAPI.CurrentComplete) {
+    let url = URL(string: WeatherAPI.currentWeatherURL(coordinates: location))!
     Alamofire.request(url).responseJSON { (resp) in
       if let dict = resp.result.value as? [String: AnyObject],
         let cityName = dict["name"] as? String,

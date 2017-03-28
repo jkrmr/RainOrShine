@@ -34,22 +34,30 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource, C
     locationManager.desiredAccuracy = kCLLocationAccuracyBest
     locationManager.requestWhenInUseAuthorization()
     locationManager.startMonitoringSignificantLocationChanges()
-    
-    CurrentWeather.fetchFromAPI { (currentWeather) in
+
+    locationAuthStatus()
+    let coords = Location.shared.currentLocationCoordinates
+
+    CurrentWeather.fetchFromAPI(location: coords) { (currentWeather) in
       guard let currentWeather = currentWeather else { return }
       self.updateCurrentWeather(currentWeather)
     }
 
-    WeatherForecast.fetchFromAPI { (forecasts) in
+    WeatherForecast.fetchFromAPI(location: coords) { (forecasts) in
       guard let forecasts = forecasts else { return }
       let futureForecasts = Array(forecasts.dropFirst(2))
       self.weatherForecasts = futureForecasts
     }
   }
 
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+  }
+
   func locationAuthStatus() {
     if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
       currentLocation = locationManager.location
+      Location.shared.set(fromLocation: currentLocation)
     } else {
       locationManager.requestWhenInUseAuthorization()
       locationAuthStatus()

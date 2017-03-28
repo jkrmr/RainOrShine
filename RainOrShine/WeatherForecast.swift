@@ -58,8 +58,8 @@ class WeatherForecast {
     return weatherForecasts
   }
 
-  static func fetchFromAPI(completed: @escaping WeatherAPI.ForecastComplete) {
-    let url = URL(string: WeatherAPI.forecastURL())!
+  static func fetchFromAPI(location: WeatherAPI.Coordinates, completed: @escaping WeatherAPI.ForecastComplete) {
+    let url = URL(string: WeatherAPI.forecastURL(coordinates: location))!
     Alamofire.request(url).responseJSON { (resp) in
       if let results = resp.result.value as? [String: AnyObject],
         let forecastData = results["list"] as? [[String: AnyObject]] {
