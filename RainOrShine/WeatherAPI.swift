@@ -35,5 +35,5 @@ struct WeatherAPI {
   }
 
   typealias CurrentComplete = (CurrentWeather?) -> ()
-  typealias ForecastComplete = ([CurrentWeather]?) -> ()
+  typealias ForecastComplete = ([WeatherForecast]?) -> ()
 }

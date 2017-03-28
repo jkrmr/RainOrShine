@@ -17,7 +17,7 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
   @IBOutlet weak var tableView: UITableView!
 
   var currentWeather: CurrentWeather?
-//  var weatherForecasts: [WeatherForecasts]?
+  var weatherForecasts: [WeatherForecast]?
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -26,11 +26,21 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     CurrentWeather.fetchFromAPI { (currentWeather) in
       guard let currentWeather = currentWeather else { return }
-      self.currentWeather = currentWeather
-      self.temperatureLabel.text = "\(currentWeather.currentTemp)º"
-      self.locationLabel.text = currentWeather.cityName
-      self.weatherDescription.text = currentWeather.weatherType
+      self.updateCurrentWeather(currentWeather)
     }
+
+    WeatherForecast.fetchFromAPI { (forecasts) in
+      guard let forecasts = forecasts else { return }
+      self.weatherForecasts = forecasts
+    }
+  }
+
+  func updateCurrentWeather(_ currentWeather: CurrentWeather) {
+    self.currentWeather = currentWeather
+    self.temperatureLabel.text = "\(currentWeather.currentTemp)º"
+    self.locationLabel.text = currentWeather.cityName
+    self.weatherDescription.text = currentWeather.weatherType
+    self.weatherImage.image = UIImage(named: currentWeather.weatherType)
   }
 
   func numberOfSections(in tableView: UITableView) -> Int {
@@ -38,11 +48,12 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 5
+    return weatherForecasts?.count ?? 0
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell", for: indexPath)
+    cell.textLabel?.text = weatherForecasts?[indexPath.row].dayOfWeek
     return cell
   }
 
