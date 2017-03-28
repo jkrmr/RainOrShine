@@ -56,8 +56,5 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     cell.textLabel?.text = weatherForecasts?[indexPath.row].dayOfWeek
     return cell
   }
-
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-  }
 }
 
