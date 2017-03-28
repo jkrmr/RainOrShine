@@ -35,7 +35,7 @@ class CurrentWeather {
         let cityName = dict["name"] as? String,
         let weather = dict["weather"] as? [(AnyObject)],
         let short = weather.first as? [String: AnyObject],
-        let weatherType = short["description"] as? String,
+        let weatherType = short["main"] as? String,
         let main = dict["main"] as? [String: AnyObject],
         let temp = main["temp"] as? Double {
 

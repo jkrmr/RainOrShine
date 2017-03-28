@@ -33,7 +33,7 @@ class WeatherForecast {
   init?(attrs: [String: AnyObject]) {
     if let weather = attrs["weather"] as? [(AnyObject)],
       let short = weather.first as? [String: AnyObject],
-      let weatherType = short["description"] as? String,
+      let weatherType = short["main"] as? String,
       let main = attrs["main"] as? [String: AnyObject],
       let tempMin = main["temp_min"] as? Double,
       let tempMax = main["temp_max"] as? Double,
