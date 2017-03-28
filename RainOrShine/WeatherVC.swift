@@ -16,7 +16,7 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
   @IBOutlet weak var weatherDescription: UILabel!
   @IBOutlet weak var tableView: UITableView!
 
-  var currentWeather: CurrentWeather?
+  var currentWeather: CurrentWeather!
   var weatherForecasts = [WeatherForecast]() {
     didSet { tableView.reloadData() }
   }
@@ -33,7 +33,8 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     WeatherForecast.fetchFromAPI { (forecasts) in
       guard let forecasts = forecasts else { return }
-      self.weatherForecasts = forecasts
+      let futureForecasts = Array(forecasts.dropFirst(2))
+      self.weatherForecasts = futureForecasts
     }
   }
 
@@ -43,6 +44,7 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     self.locationLabel.text = currentWeather.cityName
     self.weatherDescription.text = currentWeather.weatherType
     self.weatherImage.image = UIImage(named: currentWeather.weatherType)
+    self.dateLabel.text = currentWeather.date
   }
 
   func numberOfSections(in tableView: UITableView) -> Int {
