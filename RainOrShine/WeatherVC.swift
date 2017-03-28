@@ -16,15 +16,17 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
   @IBOutlet weak var weatherDescription: UILabel!
   @IBOutlet weak var tableView: UITableView!
 
+  var currentWeather: CurrentWeather?
+//  var weatherForecasts: [WeatherForecasts]?
+
   override func viewDidLoad() {
     super.viewDidLoad()
     tableView.delegate = self
     tableView.dataSource = self
-    let weather = CurrentWeather()
     
-    weather.downloadWeatherDetails { (currentWeather) in
+    CurrentWeather.fetchFromAPI { (currentWeather) in
       guard let currentWeather = currentWeather else { return }
-      self.dateLabel.text = currentWeather.date
+      self.currentWeather = currentWeather
       self.temperatureLabel.text = "\(currentWeather.currentTemp)º"
       self.locationLabel.text = currentWeather.cityName
       self.weatherDescription.text = currentWeather.weatherType
@@ -36,7 +38,7 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 6
+    return 5
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
