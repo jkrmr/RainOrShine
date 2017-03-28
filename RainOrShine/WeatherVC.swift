@@ -6,9 +6,10 @@
 //  Copyright © 2017 Jake Romer. All rights reserved.
 //
 
+import CoreLocation
 import UIKit
 
-class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
   @IBOutlet weak var dateLabel: UILabel!
   @IBOutlet weak var temperatureLabel: UILabel!
   @IBOutlet weak var locationLabel: UILabel!
@@ -21,10 +22,18 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     didSet { tableView.reloadData() }
   }
 
+  let locationManager = CLLocationManager()
+  var currentLocation: CLLocation!
+
   override func viewDidLoad() {
     super.viewDidLoad()
     tableView.delegate = self
     tableView.dataSource = self
+
+    locationManager.delegate = self
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    locationManager.requestWhenInUseAuthorization()
+    locationManager.startMonitoringSignificantLocationChanges()
     
     CurrentWeather.fetchFromAPI { (currentWeather) in
       guard let currentWeather = currentWeather else { return }
@@ -35,6 +44,15 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
       guard let forecasts = forecasts else { return }
       let futureForecasts = Array(forecasts.dropFirst(2))
       self.weatherForecasts = futureForecasts
+    }
+  }
+
+  func locationAuthStatus() {
+    if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+      currentLocation = locationManager.location
+    } else {
+      locationManager.requestWhenInUseAuthorization()
+      locationAuthStatus()
     }
   }
 
