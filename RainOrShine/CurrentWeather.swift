@@ -16,10 +16,10 @@ class CurrentWeather {
   var currentTemp: Double
   var date: String {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateStyle = .long
+    dateFormatter.dateStyle = .full
     dateFormatter.timeStyle = .none
     let currentDate = dateFormatter.string(from: Date())
-    return "Today, \(currentDate)"
+    return "\(currentDate)"
   }
 
   init(cityName: String, weatherType: String, currentTemp: Double) {
