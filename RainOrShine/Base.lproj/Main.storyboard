@@ -92,7 +92,7 @@
                                     <constraint firstAttribute="height" constant="405" id="4yw-pZ-PBa"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="weatherCell" rowHeight="91" id="wKI-br-HBg">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WeatherCell" rowHeight="91" id="wKI-br-HBg" userLabel="WeatherCell" customClass="WeatherCell" customModule="RainOrShine" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="91"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wKI-br-HBg" id="lxt-4J-yy2">
@@ -161,6 +161,13 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <connections>
+                                            <outlet property="forecastDay" destination="g5D-ab-D7p" id="ump-FP-AHQ"/>
+                                            <outlet property="forecastDescription" destination="DQF-wH-6jw" id="y4D-45-6HV"/>
+                                            <outlet property="forecastImage" destination="inW-Dv-NnW" id="sBt-A1-fil"/>
+                                            <outlet property="forecastMaxTemp" destination="11d-x7-uOw" id="cmX-mS-Khs"/>
+                                            <outlet property="forecastMinTemp" destination="rei-ae-XqE" id="HY2-mz-uhb"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

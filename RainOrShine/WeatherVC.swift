@@ -17,7 +17,9 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
   @IBOutlet weak var tableView: UITableView!
 
   var currentWeather: CurrentWeather?
-  var weatherForecasts: [WeatherForecast]?
+  var weatherForecasts = [WeatherForecast]() {
+    didSet { tableView.reloadData() }
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -48,13 +50,15 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return weatherForecasts?.count ?? 0
+    return weatherForecasts.count
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell", for: indexPath)
-    cell.textLabel?.text = weatherForecasts?[indexPath.row].dayOfWeek
+    let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherCell",
+                                             for: indexPath)
+    if let cell = cell as? WeatherCell {
+      cell.forecast = weatherForecasts[indexPath.row]
+    }
     return cell
   }
 }
-

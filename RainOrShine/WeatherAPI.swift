@@ -22,9 +22,9 @@ struct WeatherAPI {
 
   static func forecastURL(lat: String? = nil, lon: String? = nil) -> String {
     if let lat = lat, let lon = lon {
-      return "\(BASE_URL)/forecast?lat=\(lat)&lon=\(lon)&APPID=\(APP_ID)"
+      return "\(BASE_URL)/forecast/daily?lat=\(lat)&lon=\(lon)&APPID=\(APP_ID)"
     } else {
-      return "\(BASE_URL)/forecast?q=seattle&APPID=\(APP_ID)"
+      return "\(BASE_URL)/forecast/daily?q=seattle&APPID=\(APP_ID)"
     }
   }
 

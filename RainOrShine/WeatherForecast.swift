@@ -11,13 +11,13 @@ import Foundation
 import UIKit
 
 class WeatherForecast {
-  var weatherType: String?
-  var tempMin: Double?
-  var tempMax: Double?
-  var date: Int?
+  var weatherType: String
+  var tempMin: Double
+  var tempMax: Double
+  var date: Int
 
   var dayOfWeek: String {
-    let epochTime = Date(timeIntervalSince1970: Double(date!))
+    let epochTime = Date(timeIntervalSince1970: Double(date))
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "EEEE"
     return dateFormatter.string(from: epochTime)
@@ -31,19 +31,19 @@ class WeatherForecast {
   }
 
   init?(attrs: [String: AnyObject]) {
-    if let weather = attrs["weather"] as? [(AnyObject)],
-      let short = weather.first as? [String: AnyObject],
-      let weatherType = short["main"] as? String,
-      let main = attrs["main"] as? [String: AnyObject],
-      let tempMin = main["temp_min"] as? Double,
-      let tempMax = main["temp_max"] as? Double,
-      let date = attrs["dt"] as? Int {
+    guard let weatherData = attrs["weather"] as? [(AnyObject)],
+      let weather = weatherData.first as? [String: AnyObject],
+      let weatherType = weather["main"] as? String,
+      let temp = attrs["temp"] as? [String: AnyObject],
+      let tempMin = temp["min"] as? Double,
+      let tempMax = temp["max"] as? Double,
+      let date = attrs["dt"] as? Int
+      else { return nil }
 
-      self.date = date
-      self.tempMin = WeatherAPI.toFahrenheit(from: tempMin)
-      self.tempMax = WeatherAPI.toFahrenheit(from: tempMax)
-      self.weatherType = weatherType
-    }
+    self.date = date
+    self.tempMin = WeatherAPI.toFahrenheit(from: tempMin)
+    self.tempMax = WeatherAPI.toFahrenheit(from: tempMax)
+    self.weatherType = weatherType
   }
 
   static func create(forecasts: [[String: AnyObject]]) -> [WeatherForecast] {
