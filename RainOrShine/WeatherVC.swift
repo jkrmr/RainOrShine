@@ -55,13 +55,17 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource, C
   }
 
   func locationAuthStatus() {
-    if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
-      currentLocation = locationManager.location
-      Location.shared.set(fromLocation: currentLocation)
-    } else {
+    print("hello")
+    let authStatus = CLLocationManager.authorizationStatus()
+
+    while !(authStatus == .authorizedWhenInUse || authStatus == .authorizedAlways) {
       locationManager.requestWhenInUseAuthorization()
-      locationAuthStatus()
+      sleep(5)
     }
+
+    currentLocation = locationManager.location
+    Location.shared.set(fromLocation: currentLocation)
+    print("bye")
   }
 
   func updateCurrentWeather(_ currentWeather: CurrentWeather) {
